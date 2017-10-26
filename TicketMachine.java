@@ -100,20 +100,23 @@ public class TicketMachine
         return amountToRefund;
     }
 
-    /**
-     * un método llamado emptyMachine que al invocarlo vacíe la máquina de todas las monedas que hay en ella 
-     * (incluyendo si fuera el caso las que un usuario que esté usando la máquina en este momento haya metido
-     * y no haya usado aun para comprar un ticket) y que devuelva la cantidad de dinero que había en la máquina.
-     */
+   /**
+    * Modifica el primer método de esta actividad para que solo vacíe la maquina en caso de que no haya ninguna operación en curso 
+    * (es decir, no haya nigún usuario que esté ya metiendo dinero). Si la máquina tiene una operación en curso, 
+    * el método solo muestra un mensaje de error por pantalla informando de la situación lo más descriptivo posible y devuelve -1.
+    */
+    
     public int emptyMachine()
     {
-        
-        int refundMoney;
-        refundMoney = balance + total;
-        balance = 0;
-        total = 0 ;
-        return refundMoney;
-       
-
+        if (balance > 0) {
+            System.out.println("la máquina tiene una operación en curso");
+            System.out.println("error ");
+            return -1;
+        }
+        else {
+            int totalOld = total;
+            total = 0;
+            return totalOld;            
+        }
     }
 }
