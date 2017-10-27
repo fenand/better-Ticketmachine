@@ -67,37 +67,56 @@ public class TicketMachine
      * Print a ticket if enough money has been inserted, and
      * reduce the current balance by the ticket price. Print
      * an error message if more money is required.
+     * 
+     * se modifico para dar premios si es true 
      */
     public void printTicket()
     {
-        if(balance >= price) {
-            // Simulate the printing of a ticket.
-            System.out.println("##################");
-            System.out.println("# The BlueJ Line");
-            System.out.println("# Ticket");
-            System.out.println("# " + price + " cents.");
-            System.out.println("##################");
-            System.out.println();
+        if(balance >= price)
+        {
+            if(laMaquinaDaPremios == true) 
+            {
+                // Simulate the printing of a ticket.
+                System.out.println("##################");
+                System.out.println("# The BlueJ Line");
+                System.out.println("# Ticket");
+                System.out.println("# " + price + " cents.");
+                System.out.println("##################");
+                System.out.println();
 
-            // Update the total collected with the price.
-            total = total + price;
-            // Reduce the balance by the prince.
-            balance = balance - price;
+                // Update the total collected with the price.
+                total = total + price;
+                // Reduce the balance by the prince.
+                balance = balance - price;
+
+                System.out.println("##################");
+                System.out.println("# ---------------");
+                System.out.println("# Ticket de regalo");
+                System.out.println("##################");
+                System.out.println();
+            }
+
+            else if (balance >= price ) 
+            {
+                // Simulate the printing of a ticket.
+                System.out.println("##################");
+                System.out.println("# The BlueJ Line");
+                System.out.println("# Ticket");
+                System.out.println("# " + price + " cents.");
+                System.out.println("##################");
+                System.out.println();
+
+                // Update the total collected with the price.
+                total = total + price;
+                // Reduce the balance by the prince.
+                balance = balance - price;
+            }
         }
 
-        else {
+        else 
+        {
             System.out.println("You must insert at least: " +
                 (price - balance) + " more cents.");
-
-        }
-        if (laMaquinaDaPremios == true) {
-            System.out.println("##################");
-            System.out.println("# ---------------");
-            System.out.println("# Ticket de regalo");
-            System.out.println("##################");
-            System.out.println();
-        }
-        else{
 
         }
     }
@@ -114,27 +133,7 @@ public class TicketMachine
         return amountToRefund;
     }
 
-    /**
-     * Modifica el primer método de esta actividad para que solo vacíe la maquina en caso de que no haya ninguna operación en curso 
-     * (es decir, no haya nigún usuario que esté ya metiendo dinero). Si la máquina tiene una operación en curso, 
-     * el método solo muestra un mensaje de error por pantalla informando de la situación lo más descriptivo posible y devuelve -1.
-     */
-
-    /**public int emptyMachine()
-    {
-    if (balance > 0) {
-    System.out.println("la máquina tiene una operación en curso");
-    System.out.println("error ");
-    return -1;
-    }
-    else {
-    int total2 = total;
-    total = 0;
-    return total2;            
-    }
-    }
-     */
-    public int emtyMachine2()
+    public int emtyMachine()
     {
         int amountToRefund;
         if (balance == 0){
