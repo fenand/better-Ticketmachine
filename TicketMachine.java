@@ -17,15 +17,18 @@ public class TicketMachine
     private int balance;
     // The total amount of money collected by this machine.
     private int total;
+    // true si da premios false en caso contrario
+    private boolean laMaquinaDaPremios;
 
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost)
+    public TicketMachine(int cost, boolean daPremios)
     {
         price = cost;
         balance = 0;
         total = 0;
+        laMaquinaDaPremios = daPremios;
     }
 
     /**
@@ -81,9 +84,20 @@ public class TicketMachine
             // Reduce the balance by the prince.
             balance = balance - price;
         }
+
         else {
             System.out.println("You must insert at least: " +
                 (price - balance) + " more cents.");
+
+        }
+        if (laMaquinaDaPremios == true) {
+            System.out.println("##################");
+            System.out.println("# ---------------");
+            System.out.println("# Ticket de regalo");
+            System.out.println("##################");
+            System.out.println();
+        }
+        else{
 
         }
     }
@@ -100,23 +114,38 @@ public class TicketMachine
         return amountToRefund;
     }
 
-   /**
-    * Modifica el primer método de esta actividad para que solo vacíe la maquina en caso de que no haya ninguna operación en curso 
-    * (es decir, no haya nigún usuario que esté ya metiendo dinero). Si la máquina tiene una operación en curso, 
-    * el método solo muestra un mensaje de error por pantalla informando de la situación lo más descriptivo posible y devuelve -1.
-    */
-    
-    public int emptyMachine()
+    /**
+     * Modifica el primer método de esta actividad para que solo vacíe la maquina en caso de que no haya ninguna operación en curso 
+     * (es decir, no haya nigún usuario que esté ya metiendo dinero). Si la máquina tiene una operación en curso, 
+     * el método solo muestra un mensaje de error por pantalla informando de la situación lo más descriptivo posible y devuelve -1.
+     */
+
+    /**public int emptyMachine()
     {
-        if (balance > 0) {
-            System.out.println("la máquina tiene una operación en curso");
-            System.out.println("error ");
-            return -1;
-        }
-        else {
-            int totalOld = total;
+    if (balance > 0) {
+    System.out.println("la máquina tiene una operación en curso");
+    System.out.println("error ");
+    return -1;
+    }
+    else {
+    int total2 = total;
+    total = 0;
+    return total2;            
+    }
+    }
+     */
+    public int emtyMachine2()
+    {
+        int amountToRefund;
+        if (balance == 0){
+            amountToRefund = total;
             total = 0;
-            return totalOld;            
+
         }
+        else{
+            System.out.println("La maquina tiene una operacion en curso -- ERROR");
+            amountToRefund = -1;
+        }
+        return amountToRefund;
     }
 }
