@@ -19,16 +19,22 @@ public class TicketMachine
     private int total;
     // true si da premios false en caso contrario
     private boolean laMaquinaDaPremios;
+    //Contador del numero de billetes vendidos de la maquina 
+    private int numeroDeBilletesVendidos;
+    //Numero maximo de billetes que puede vender
+    private int numeroMaximoBilletes;
 
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost, boolean daPremios)
+    public TicketMachine(int cost, boolean daPremios, int maximoBilletes )
     {
         price = cost;
         balance = 0;
         total = 0;
         laMaquinaDaPremios = daPremios;
+        numeroDeBilletesVendidos = 0;
+        numeroMaximoBilletes = maximoBilletes;
     }
 
     /**
@@ -54,13 +60,15 @@ public class TicketMachine
      */
     public void insertMoney(int amount)
     {
-        if(amount > 0) {
+        if(amount > 0 )
+        {
             balance = balance + amount;
         }
-        else {
+        else  
+        {
             System.out.println("Use a positive amount rather than: " +
                 amount);
-        }
+        } 
     }
 
     /**
@@ -72,53 +80,65 @@ public class TicketMachine
      */
     public void printTicket()
     {
-        if(balance >= price)
+        if(numeroDeBilletesVendidos < numeroMaximoBilletes)
         {
-            if(laMaquinaDaPremios == true) 
+            if(balance >= price)
             {
-                // Simulate the printing of a ticket.
-                System.out.println("##################");
-                System.out.println("# The BlueJ Line");
-                System.out.println("# Ticket");
-                System.out.println("# " + price + " cents.");
-                System.out.println("##################");
-                System.out.println();
+                if(laMaquinaDaPremios) 
+                {
+                    // Simulate the printing of a ticket.
+                    System.out.println("##################");
+                    System.out.println("# The BlueJ Line");
+                    System.out.println("# Ticket");
+                    System.out.println("# " + price + " cents.");
+                    System.out.println("##################");
+                    System.out.println();
 
-                // Update the total collected with the price.
-                total = total + price;
-                // Reduce the balance by the prince.
-                balance = balance - price;
+                    // Update the total collected with the price.
+                    total = total + price;
+                    // Reduce the balance by the prince.
+                    balance = balance - price;
 
-                System.out.println("##################");
-                System.out.println("# ---------------");
-                System.out.println("# Ticket de regalo");
-                System.out.println("##################");
-                System.out.println();
+                    System.out.println("##################");
+                    System.out.println("# ---------------");
+                    System.out.println("# Ticket de regalo");
+                    System.out.println("##################");
+                    System.out.println();
+                    
+                    numeroDeBilletesVendidos = numeroDeBilletesVendidos + 1;
+                }
+
+                else if (balance >= price ) 
+                {
+                    // Simulate the printing of a ticket.
+                    System.out.println("##################");
+                    System.out.println("# The BlueJ Line");
+                    System.out.println("# Ticket");
+                    System.out.println("# " + price + " cents.");
+                    System.out.println("##################");
+                    System.out.println();
+
+                    // Update the total collected with the price.
+                    total = total + price;
+                    // Reduce the balance by the prince.
+                    balance = balance - price;
+                    numeroDeBilletesVendidos = numeroDeBilletesVendidos + 1;
+                }
             }
 
-            else if (balance >= price ) 
+            else 
             {
-                // Simulate the printing of a ticket.
-                System.out.println("##################");
-                System.out.println("# The BlueJ Line");
-                System.out.println("# Ticket");
-                System.out.println("# " + price + " cents.");
-                System.out.println("##################");
-                System.out.println();
+                System.out.println("You must insert at least: " +
+                    (price - balance) + " more cents.");
 
-                // Update the total collected with the price.
-                total = total + price;
-                // Reduce the balance by the prince.
-                balance = balance - price;
             }
         }
+        else{
 
-        else 
-        {
-            System.out.println("You must insert at least: " +
-                (price - balance) + " more cents.");
+            System.out.println("Se han vendido todos los billetes");
 
         }
+
     }
 
     /**
