@@ -62,7 +62,12 @@ public class TicketMachine
     {
         if(amount > 0 )
         {
-            balance = balance + amount;
+            if (numeroDeBilletesVendidos<numeroMaximoBilletes){
+                balance = balance + amount;
+            }
+            else{
+                System.out.println("No quedan billetes disponibles no se puede introducir dinero");
+            }
         }
         else  
         {
@@ -104,7 +109,7 @@ public class TicketMachine
                     System.out.println("# Ticket de regalo");
                     System.out.println("##################");
                     System.out.println();
-                    
+
                     numeroDeBilletesVendidos = numeroDeBilletesVendidos + 1;
                 }
 
